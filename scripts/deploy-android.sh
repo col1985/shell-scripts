@@ -64,5 +64,5 @@ function main {
     startDeploy $buildpath $pkgname $launch
 }
 
-# invoke script
+# invoke script passing 3 arguments
 main $1 $2 $3
