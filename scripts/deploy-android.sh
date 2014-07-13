@@ -11,6 +11,11 @@
 #
 ############################################################
 
+# varibales
+buildpath=$1
+pkgname=$2
+launch=$3
+
 # clean
 function startClean {
     printf '\n\n'
@@ -18,9 +23,9 @@ function startClean {
 
     printf '\n\n'
     
-    rm platforms/android/bin/example-debug.apk
+    rm $buildpath
 
-    adb shell pm uninstall -k com.example.app
+    adb shell pm uninstall -k $pkgname
     
     printf '\n\n'
 }
@@ -44,16 +49,20 @@ function startDeploy {
 
     printf '\n\n'
 
-    adb install -r platforms/android/bin/example-debug.apk
+    adb install -r $buildpath
 
-    adb shell am start -n com.feedhenry.app/com.feedhenry.app.MAINCLASSNAME
+    adb shell am start -n $pkgname/$pkgname.$launch
 
     printf '\n\n'
 }
 
-#
-startClean
+function main {
+    startClean $buildpath $pkgname
 
-startBuild
+    startBuild
 
-startDeploy
+    startDeploy $buildpath $pkgname $launch
+}
+
+# invoke script
+main $1 $2 $3

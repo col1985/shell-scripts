@@ -4,7 +4,8 @@
 #
 # .weinre.sh
 #
-#
+# Pass the your networks ip address as a param to start a
+# weinre server for on device debugging.
 #
 ############################################################
 
@@ -14,12 +15,15 @@ ip=$1
 # start weirne by passing network ip
 function start {
     printf '\n\n'
-    echo '******************************** Starting Weire ********************************'
+    echo '******************************** starting weinre ********************************'
 
     printf '\n'
 
     weinre --boundHost $ip --debug
     
+    printf '\n'
+
+    echo '******************************** closing weinre ********************************' 
     printf '\n\n'
 }
 
