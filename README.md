@@ -28,13 +28,13 @@ new apk using cordova cli, installing the apk on device and finally launching th
 
 ### weinre.sh
 
-Pass the your networks ip address as an arguement to start a weinre server for on device debugging
+This script will automatically detect your mac's ip address from interface `en0`. The script
+is dependent on [Weirne](http://people.apache.org/~pmuellr/weinre/docs/latest/Home.html) installed
+on your machine, and a wifi connection. 
 
   ```shell
-     ./weinre.sh <ip>
+     ./weinre.sh
   ```
-
-- **ip** - ip address of your mac / pc on your wifi network eg `192.168.10.100`.  
 
 **Note** You can get your devices network IP address by running `ifconfig` from a terminal window. Please review 
 [Weirne homepage](http://people.apache.org/~pmuellr/weinre/docs/latest/Home.html) for further intructions on debugging your Cordova project.   
