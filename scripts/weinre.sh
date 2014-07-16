@@ -4,30 +4,42 @@
 #
 # .weinre.sh
 #
-# Pass the your networks ip address as a param to start a
-# weinre server for on device debugging.
+# Script will automatically detect `en0` ip address property
+# and pass to a function to start a weirne service for on
+# device debugging of cordova based hybird apps
 #
 ############################################################
 
 # Variables
-ip=$1
+# ip=$1
+ip=$(ipconfig getifaddr en0)
 
 # start weirne by passing network ip
 function start {
-    printf '\n\n'
-    echo '******************************** starting weinre ********************************'
+    if [ "$ip" != "" ]; then
+      printf "\n\n"
+      echo "$(tput setaf 6)******************************** Starting weinre *******************************$(tput sgr0)"
+      printf "\n"
 
-    printf '\n'
+      weinre --boundHost $ip --debug
 
-    weinre --boundHost $ip --debug
-    
-    printf '\n'
+      printf "\n"
+      echo "$(tput setaf 6)******************************** Closing weinre ********************************$(tput sgr0)"
+      printf "\n\n"
+    else
+      printf "\n\n"
+      echo "$(tput setaf 1)*************************** Error ****************************$(tput sgr0)"
+      printf "\n"
 
-    echo '******************************** closing weinre ********************************' 
-    printf '\n\n'
+      echo "$(tput setaf 1)IP address could not be determined.$(tput sgr0)"
+      printf "\n"
+      echo "$(tput setaf 1)Please check that you have a network connection and try again.$(tput sgr0)"
+
+      printf "\n"
+      echo "$(tput setaf 1)**************************************************************$(tput sgr0)"
+      printf "\n\n"
+    fi
 }
 
 # invoke start passing ip param
-start $1
-
-
+start
