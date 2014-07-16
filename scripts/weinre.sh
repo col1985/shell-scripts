@@ -10,12 +10,13 @@
 #
 ############################################################
 
-# Variables
-# ip=$1
-ip=$(ipconfig getifaddr en0)
-
 # start weirne by passing network ip
 function start {
+
+    # Variables
+    ip=$(ipconfig getifaddr en0)
+
+    # check if ip is set
     if [ "$ip" != "" ]; then
       printf "\n\n"
       echo "$(tput setaf 6)******************************** Starting weinre *******************************$(tput sgr0)"
@@ -41,5 +42,5 @@ function start {
     fi
 }
 
-# invoke start passing ip param
+# invoke
 start
